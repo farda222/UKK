@@ -114,7 +114,7 @@
             };
 
             let message = `Halo, saya ingin mengkonfirmasi penyewaan mobil dengan detail berikut:
-        
+
 Nama: ${customerName}
 Mobil: ${carName}
 Mulai: ${formatDateTime(startDate)}
@@ -131,7 +131,7 @@ A/N: Nama Pemilik`;
 
             message += "\n\nMohon konfirmasi pemesanan saya. Terima kasih!";
 
-            const phoneNumber = '6282328715044';
+            const phoneNumber = '6285726591480';
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
             try {
