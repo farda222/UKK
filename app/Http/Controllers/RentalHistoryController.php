@@ -17,11 +17,18 @@ class RentalHistoryController extends Controller
 
         // If user is a customer (role 1)
         if (!$isAdmin) {
-            $customerId = Customer::where('name', $user->name)->first()->id;
-            $rentals = Rental::with(['car', 'customer'])
-                ->where('customer_id', $customerId)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $customer = Customer::where('name', $user->name)->first();
+
+            // Check if customer data exists for the user
+            if ($customer) {
+                $rentals = Rental::with(['car', 'customer'])
+                    ->where('customer_id', $customer->id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            } else {
+                // No customer record found, so no rentals to show
+                $rentals = collect();
+            }
         } else {
             // If admin (role 0), get all rentals
             $rentals = Rental::with(['car', 'customer'])
