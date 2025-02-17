@@ -11,18 +11,9 @@ use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\RentalHistoryController;
 
-Route::middleware('auth')->get('/checkout/form/{carId}', [CheckoutController::class, 'form'])->name('checkout.form');
-Route::get('/checkout/form/{carId}', [CheckoutController::class, 'form'])->name('checkout.form');
-Route::get('/history', [RentalController::class, 'history'])->name('rental.history')->middleware('auth');
-
-
-Route::post('/process-checkout/{car}', [CheckoutController::class, 'store'])->name('process.checkout');
 // Definisikan rute checkout hanya di dalam grup middleware 'auth' untuk memastikan hanya pengguna yang login yang bisa mengaksesnya
 Route::middleware('auth')->group(function () {
-    Route::post('checkout/{car}', [CheckoutController::class, 'processCheckout'])->name('process.checkout');
     Route::post('/checkout/{car}', [CheckoutController::class, 'store'])->name('process.checkout');
-
-    Route::post('/process-checkout/{car}', [CheckoutController::class, 'store'])->name('process.checkout');
 
     Route::get('/checkout/{car}', [ProductController::class, 'checkout'])->name('checkout');
 
@@ -56,13 +47,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/checkout/{carId}', [CheckoutController::class, 'store'])->name('rent');
 
-    Route::post('/checkout/{carId}', [CheckoutController::class, 'store'])->name('checkout.store');
-
     // Route untuk GET request
     Route::get('/checkout/{carId}', [CheckoutController::class, 'store'])->name('checkout.store');
 
     Route::post('/checkout/{carId}', [CheckoutController::class, 'store'])->name('checkout.store');
-    Route::middleware('auth')->get('/checkout/form/{carId}', [CheckoutController::class, 'form'])->name('checkout.form');
     Route::get('/checkout/form/{carId}', [CheckoutController::class, 'form'])->name('checkout.form');
 
     Route::post('/process-rental', [RentalController::class, 'processRental'])->name('process.rental');
