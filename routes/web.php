@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/user-data', [UserDataController::class, 'store'])->name('user-data.store');
 
     // Route untuk GET request
-    Route::get('/checkout/{carId}', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/{carId}', [CheckoutController::class, 'store'])->name('checkout.store.get');
 
     Route::post('/checkout/{carId}', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/checkout/form/{carId}', [CheckoutController::class, 'form'])->name('checkout.form');
